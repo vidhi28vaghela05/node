@@ -16,7 +16,7 @@ let userSchema = new mongoose.Schema({
         required: true,
     },
     password: {
-        type: true,  
+        type: String,  
         required: true,
         select: false, //find query -- select false --> response ma add na thay
     },

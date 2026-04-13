@@ -3,7 +3,6 @@ const  userService = require('../services/user.service');
 const {validationResult} = require('express-validator');
 
 const userModel = require('../models/user.model');
-const { TokenExpiredError } = require('jsonwebtoken');
 
 module.exports.registerUser = async (req, res) => {
     const errors = validationResult(req);
@@ -17,9 +16,7 @@ const {username, email, password} = req.body;
        return res.status(400).json({message: 'User already exists'});
    }
    const hashPassword = await userModel.hashPassword(password);
-   const user = await userService.createUser({username, email, password: hashPassword,});
-   
-
-   let token = await user.generateJwtToken();
-   res.status(200).json({token, user});
+   const user = await userService.createUser({username, email, password: hashPassword});
+   let token = await user.generateAuthToken();
+   res.status(200).json({message: 'User registered successfully', user, token});
 };
