@@ -29,7 +29,7 @@ let userSchema = new mongoose.Schema({
 
 // create a method  for jwt token
 userSchema.methods.generateJwtToken = function() {
-   let token = jwt.sign({_id: this._id}, process.env.JWT_SECRET_KEY, {expiresIn: '7d',});
+   let token = jwt.sign({_id: this._id}, process.env.JWT_SECRET, {expiresIn: '7d',});
    return token;
 };
 // create a method for bcrypt
