@@ -41,5 +41,12 @@ module.exports.loginUser = async (req, res) => {
    }
     const token = await checkUser.generateJwtToken();
 
+    res.cookie("token",token);
+
     res.status(200).json({message: 'User logged in successfully', user: checkUser, token})
+};
+
+
+module.exports.profileUser = async (req, res) => {
+    res.status(200).json({message: 'User profile retrieved successfully', user: req.user});
 };

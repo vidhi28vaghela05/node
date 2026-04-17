@@ -6,11 +6,12 @@ const express = require('express');
 const db = require('./config/db');
 const userRoute = require('./routes/web/user.route');
 const app = express();
-
+const cookieParser = require("cookie-parser")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 db();
+app.use(cookieParser());
 //to excess env values in file:
 //backend (node + express) --> process.env.(env file variable name) --> process.env.PORT
 
