@@ -6,6 +6,7 @@ export default function JoinUsPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -21,7 +22,9 @@ export default function JoinUsPage() {
         navigate("/profile")
       }
     } catch (error) {
-      console.log(error)
+      console.log(error.response?.data?.error);
+      let Err = error.response?.data?.error;
+      setError(Err);
     }
 
   };
@@ -53,6 +56,11 @@ export default function JoinUsPage() {
             SubmitForm();
           }}
         >
+          {error && <div>
+            {error.map((val)=>{
+              return<p className="text-red-400 bg-red-50 mb-2 p-2 rounded-xl">{val.msg}</p>
+            })}
+            </div>}
           {/* Username Field */}
           <div className="space-y-1">
             <input
