@@ -7,26 +7,32 @@ export default function JoinUsPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [exist, setExist] = useState("");
 
   const navigate = useNavigate();
 
   const SubmitForm = async () => {
-    const userData = {username: username, email: email, password: password};
+    const userData = { username: username, email: email, password: password };
 
     try {
-      let response = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/register`, userData);
-      if(response.status === 200){
+      let response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/user/register`,
+        userData,
+      );
+      if (response.status === 200) {
         const data = response.data;
         localStorage.setItem("token", data.token);
 
-        navigate("/profile")
+        navigate("/profile");
       }
     } catch (error) {
-      console.log(error.response?.data?.error);
+      console.log(error.response);
       let Err = error.response?.data?.error;
       setError(Err);
-    }
 
+      let Err2 = error.response?.data?.message;
+      setExist(Err2);
+    }
   };
 
   return (
@@ -56,11 +62,23 @@ export default function JoinUsPage() {
             SubmitForm();
           }}
         >
-          {error && <div>
-            {error.map((val)=>{
-              return<p className="text-red-400 bg-red-50 mb-2 p-2 rounded-xl">{val.msg}</p>
-            })}
-            </div>}
+          {error && (
+            <div>
+              {error.map((val) => {
+                return (
+                  <p className="text-red-400 bg-red-50 mb-2 p-2 rounded-xl">
+                    {val.msg}
+                  </p>
+                );
+              })}
+            </div>
+          )}
+          {exist && (
+            <p className="text-red-400 font-medium bg-red-50 rounded-xl p-2">
+              {exist}
+            </p>
+          )}
+
           {/* Username Field */}
           <div className="space-y-1">
             <input
@@ -68,7 +86,7 @@ export default function JoinUsPage() {
               placeholder="Username"
               name="username"
               value={username}
-              onChange={(e)=>{
+              onChange={(e) => {
                 setUsername(e.target.value);
               }}
               className="w-full px-5 py-4 bg-white/50 border border-slate-200/60 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-200 focus:bg-white transition-all placeholder:text-slate-400 text-sm"
@@ -82,7 +100,7 @@ export default function JoinUsPage() {
               placeholder="Email address"
               name="email"
               value={email}
-              onChange={(e)=>{
+              onChange={(e) => {
                 setEmail(e.target.value);
               }}
               className="w-full px-5 py-4 bg-white/50 border border-slate-200/60 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-200 focus:bg-white transition-all placeholder:text-slate-400 text-sm"
@@ -96,14 +114,17 @@ export default function JoinUsPage() {
               placeholder="Password"
               name="password"
               value={password}
-              onChange={(e)=>{
+              onChange={(e) => {
                 setPassword(e.target.value);
               }}
               className="w-full px-5 py-4 bg-white/50 border border-slate-200/60 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-200 focus:bg-white transition-all placeholder:text-slate-400 text-sm"
             />
           </div>
 
-          <button type="submit" className="w-full mt-2 py-4 bg-slate-900 text-white text-sm font-semibold rounded-2xl hover:bg-slate-800 transition-all active:scale-[0.98] shadow-lg shadow-slate-200">
+          <button
+            type="submit"
+            className="w-full mt-2 py-4 bg-slate-900 text-white text-sm font-semibold rounded-2xl hover:bg-slate-800 transition-all active:scale-[0.98] shadow-lg shadow-slate-200"
+          >
             Create Account
           </button>
         </form>
