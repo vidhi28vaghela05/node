@@ -1,19 +1,20 @@
+import React from 'react'
 import { Route, Routes } from "react-router-dom"
-import LoginPage from "./Pages/LoginPage"
-import Home from "./Pages/Home"
-import JoinUsPage from "./Pages/JoinUsPage"
-import ProfilePage from "./Pages/ProfilePage"
-
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Joinus from './pages/Joinus'
+import Profile from './pages/Profile'
 
 const App = () => {
   return (
-  <Routes>
-    <Route path="/" element = {<Home/>}/>
-    <Route path="/login" element = {<LoginPage/>}/>
-    <Route path="/joinus" element = {<JoinUsPage/>}/>
-    <Route path="/profile" element = {<ProfilePage/>}/>
-    
-  </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/joinus" element={<Joinus />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </>
   )
 }
 
