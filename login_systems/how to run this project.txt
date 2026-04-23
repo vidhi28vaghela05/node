@@ -1,0 +1,12 @@
+in first terminal:- run frontend
+
+cd frontend
+npm install
+npm run dev
+
+
+in second terminal:- run backend
+
+cd backend
+npm install
+npx nodemon

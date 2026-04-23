@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 
 // Routes
 app.use("/user", userRouter);
-app.use("/profile", adminRouter)
+app.use("/admin",adminRouter);
 
 app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`)
