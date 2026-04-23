@@ -13,6 +13,7 @@ router.delete("/user/:id", userMiddleware.authUser,adminMiddleware.authAdmin, ad
 
 
 // change role - create manager
-router.put("/user/:id/role")
+router.put("/user/:id/role",userMiddleware.authUser,adminMiddleware.authAdmin, adminController.UpdateUserRole
+)
 
 module.exports = router;

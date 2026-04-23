@@ -13,8 +13,8 @@ module.exports.deleteUser = async(id) => {
 // update user role
 module.exports.updateRole = async({userId, role})=>{
     return await userModel.findOneAndUpdate(
-        {},
-        {},
+        {_id: userId},
+        {role},
         {new: true}
     )
 }
