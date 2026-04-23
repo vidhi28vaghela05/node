@@ -9,10 +9,10 @@ let adminController = require("../../controllers/admin.controller");
 router.get("/all", userMiddleware.authUser, adminMiddleware.authAdmin, adminController.AllUser,)
 
 // delete single user
-router.delete("/user/:id", userMiddleware.authUser, adminController.AllUser)
+router.delete("/user/:id", userMiddleware.authUser,adminMiddleware.authAdmin, adminController.DeleteUser)
 
 
 // change role - create manager
-
+router.put("/user/:id/role")
 
 module.exports = router;

@@ -25,7 +25,7 @@ module.exports.DeleteUser = async (req, res) => {
       return res.status(404).json({ message: "User Not Found !!" });
     }
 
-    return res.status(400).json({message: "user Deleted Sucessfully"});
+    return res.status(400).json({message: "user Deleted Sucessfully", deleteUser});
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
