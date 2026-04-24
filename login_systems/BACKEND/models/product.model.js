@@ -30,17 +30,17 @@ let ProductSchema = mongoose.Schema({
         default: true,
       
     },
-    shu:{
-          type: Number,
+    sku:{
+          type: String,
           unique:true,
         required: true
       
     },
-    images:{
+    images:[{
           type: String,
         required: true,
         
-    },
+    }],
     brand:{
           type: String,
         required: true,

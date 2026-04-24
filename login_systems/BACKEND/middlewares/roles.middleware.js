@@ -1,6 +1,6 @@
 module.exports.allowRoles = (...roles) => {
     return (req, res, next) => {
-        if(!req.user || roles.includes(req.user.role)){
+        if(!req.user || !roles.includes(req.user.role)){
             throw new Error("access denied !!");
         }
         next();
