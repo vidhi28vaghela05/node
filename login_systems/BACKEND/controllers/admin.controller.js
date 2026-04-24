@@ -25,28 +25,27 @@ module.exports.DeleteUser = async (req, res) => {
       return res.status(404).json({ message: "User Not Found !!" });
     }
 
-    return res.status(400).json({message: "user Deleted Sucessfully", deleteUser});
+    return res.status(200).json({ message: "user Deleted Successfully" });
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
 };
 
-
-module.exports.UpdateUserRole = async (req, res)=>{
-    try{
+// update user role
+module.exports.UpdateUserRole = async (req, res) => {
+    try {
         const {role} = req.body;
-        const userId =  req.params.id;
+        const userId = req.params.id;
+
         if(req.user.role !== "admin"){
-            return res.status(401).json({message: "Access Denied !!"});
+            return res.status(401).json({message: "access denied !!"});
         }
-        const user = await adminService.updateRole({userId, role});
-        return res.status(200).json({message: "update role of user", user})
-    }catch(error){
-        return res.status(400).json({message:error.message})
+
+        const user =await adminService.updateRole({ userId, role });
+
+        return res.status(200).json({message: "update role of user", user});
+    } catch (error) {
+        return res.status(400).json({message: error.message})
     }
-}
-
-
-
-
+};
 

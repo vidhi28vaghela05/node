@@ -9,4 +9,9 @@ module.exports.CreateProduct = async ({name, description, stock, price, discount
     let product = await productModel.create({name, description, stock, price, discount, isNewProduct, sku, images, brand, category})
 
     return product;
+};
+
+// get all product
+module.exports.GetAllProduct = async () => {
+    return await productModel.find();
 }
