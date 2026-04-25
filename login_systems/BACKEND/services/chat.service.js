@@ -1,3 +1,17 @@
+const {GoogleGenAI } = require('@google/genai');
+
+// ai chat bot
+const getAIreplay = async(message)=>{
+  const ai = new  GoogleGenAI(process.env.GEMINI_API_KEY);
+
+   const response = await ai.models.generateContent({
+    model: "gemini-3-flash-preview",
+    contents: message,
+  });
+ return response.text;
+}
+
+
 // Rule Based ChatBot
 const getStaticReply = (message) => {
   const text = message.toLowerCase();
@@ -30,4 +44,8 @@ const getStaticReply = (message) => {
 
 module.exports.BotReplay = async (message) => {
     return getStaticReply(message);
-}
+};
+
+module.exports.AIBotReplay =  async(message)=>{
+  return await getAIreplay(message);
+};
